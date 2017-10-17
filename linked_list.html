@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>链表</title>
+</head>
+<body>
+	
+	<script>
+
+		//node类
+		function Node (element) {
+			this.element = element;
+			this.next = null;
+		}
+
+		//定义一个LList类 对链表进行操作
+		function LList(){
+			this.head = new Node("head");
+			this.find = find;
+			this.insert = insert;
+			//this.remove = remove;
+			this.display = display;
+		}
+
+		//定义find遍历链表
+		function find (item) {
+			var currNode = this.head;
+			while(currNode.element!= item){
+				currNode = currNode.next;
+			}
+			return currNode;
+		}
+
+		//定义一个插入的方法
+		function insert(newElement,item){
+			var newNode = new Node(newElement);
+			var current = this.find(item);
+			newNode.next = current.next;
+			current.next = newNode;
+		}
+
+		//定义一个display显示元素
+		function display(){
+			var currNode = this.head ;
+			while (!(currNode.next == null)){
+				currNode = currNode.next;
+			}
+		}
+
+		//测试
+		var cities = new LList();
+		cities.insert("Conway","head");
+		cities.insert("Russellville","Conway");
+		cities.insert("Alma","Russellville");
+		cities.display()
+
+	</script>
+
+
+
+
+	
+</body>
+</html>
