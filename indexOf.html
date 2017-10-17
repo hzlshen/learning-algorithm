@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+        <script>
+            
+        /*var names = ["Daivd","Mike","jennifer","Clayton","Raymound"];
+        putstr("Enter a name to seach for:");
+        var name = readline();
+        var position = names.indexOf(name);
+        if(position >= 0){
+            console.log("Found" + name + "at position"  + position);
+        }else{
+            console.log(name +"not Found is array");
+        }*/
+
+        //join() toString()  数组转换成字符串
+        var names = ["Daivd","Mike","jennifer","Clayton","Raymound"];
+        namestr =  names.join();
+        console.log(namestr);
+        namestr = names.toString();
+        console.log(namestr);
+
+        //concat()合并多个并创建新的数组
+        var cis = ["Daivd","Mike","jennifer","Clayton","Raymound"];
+        var dmp = ["555","666","999"]; 
+        var itDiv = cis.concat(dmp);
+        console.log(itDiv);  //["Daivd", "Mike", "jennifer", "Clayton", "Raymound", "555", "666", "999"]
+        var itDiv = dmp.concat(cis);
+        console.log(itDiv);  //["555", "666", "999", "Daivd", "Mike", "jennifer", "Clayton", "Raymound"]
+
+        var itDiv = ["Daivd","Mike","jennifer","Clayton","Raymound","HTosa","json"];
+        var dmp =  itDiv.splice(3,3);
+        var cis = itDiv;
+        console.log(dmp);  //["Clayton", "Raymound", "HTosa"]
+        console.log(cis);  //["Daivd", "Mike", "jennifer", "json"]
+
+        //psuh() 添加元素到数组末尾
+        var nums = [1,2,3,4,5];
+        console.log(nums);
+        nums.push(6);
+        console.log(nums);
+
+        var nums = [1,2,3,4,5];
+        console.log(nums);
+        nums[nums.length] = 6;
+        console.log(nums);
+
+        //添加元素到数组开头
+        var nums = [2,3,4,5];
+        var nwenum = 1;
+        var N = nums.length;
+        for (var i = N; i >= 0; --i) {
+            nums[i] = nums[i-1];
+        }
+        nums[0] = nwenum;
+        console.log(nums);  //[1, 2, 3, 4, 5]
+
+
+        var nums = [2,3,4,5];
+        console.log(nums);
+        var newnu = 1;
+        nums.unshift(newnu);
+        console.log(nums);  //[1, 2, 3, 4, 5]
+
+        //pop()删除数组末尾元素
+        var number = [1,2,3,4,5,9];
+        console.log(number);
+        number.pop();
+        console.log(number);
+
+        var numbers = [9,1,2,3,4,5];
+        for(var i = 0; i<numbers.length; ++i){
+            numbers[i] = numbers[i+1];
+        }
+        console.log(numbers);  //[1, 2, 3, 4, 5, undefined]
+
+        var nums = [9,1,2,3,4,5];
+        nums.shift();
+        console.log(nums);  //[1, 2, 3, 4, 5]
+
+        //使用一个变量保存删除的元素
+        var num1 = [6,1,2,3,4,5];
+        var first = num1.shift();
+        num1.push(first);
+        console.log(num1);
+
+        //从数组中间插入
+        var nums = [1,2,3,7,8,9];
+        var newEl = [4,5,6];
+        nums.splice(3,0,newEl);
+        console.log(nums);
+
+        var num2 = [1,2,3,7,8,9];
+        num2.splice(3,0,4,5,6);
+        console.log(num2);  //[1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+        var num3 = [1,2,3,200,100,300,400,4,5];
+        num3.splice(3,4);  //从第三个位置开始删 删四个
+        console.log(num3);  //[1, 2, 3, 4, 5]
+        </script>
+
+    <script>
+
+        //翻转
+        var num = [1,2,3,4,5];
+        num.reverse();
+        console.log(num);  //[5, 4, 3, 2, 1]
+
+        var names = ["Daivd","Mike","Cynthia","Clayton","Bryan","Raymound"];
+        names.sort();
+        console.log(names);
+
+        var nums = [3,1,2,100,4,200];
+        nums.sort();
+        console.log(nums);  //[1, 100, 2, 200, 3, 4]
+
+        //比较大小
+        function compaer(num1,num2) {
+            return num1 - num2;
+        }
+        var nums = [3,1,2,100,4,200];
+        nums.sort(compaer);
+        console.log(nums);
+
+        //迭代器方法  forEach() 要么对元素执行某种操作 要么返回一个值
+        function square(num) {
+            console.log(num,num*num);
+        }
+        var num1 = [1,2,3,4,5,6,7,8,9,10];
+        num1.forEach(square);
+
+        //2、 every() 该方法接受一个返回值为布尔类型的函数 
+        function isEven(num) {
+            return num % 2 == 0;
+        }
+        var nums = [2,4,6,8,10];
+        var even = nums.every(isEven);
+        if(even){
+            console.log("all numbers are even");  //true
+        }else{
+            console.log("not all numbers are even");
+        }
+
+        //smoe()函数也是接收一个布尔类型的值
+        function isArray(num){
+            return num % 2 == 0; 
+        }
+        var numus = [1,2,3,4,5,6,7,8,9,10];
+        var someEven = numus.some(isArray);
+        if(someEven){
+            console.log("true");
+        }else{
+            console.log("false");
+        }
+        nums =[1,3,5,7,9];
+        someEven = nums.some(isArray);
+        if(someEven){
+            console.log("true");
+        }else{
+            console.log("false");
+        }
+
+
+        //reduce()
+        function add(runningtotal,currentvalue){
+            return runningtotal + currentvalue;
+        }
+        var nums = [1,2,3,4,5,6,7,8,9,10];
+        var sum = nums.reduce(add);
+        console.log(sum);  //55
+
+        function concat(accumstr,item){
+            return accumstr + item;
+        }
+        var words = ["the","quick","brown","fox"];
+        var sentent = words.reduce(concat);
+        console.log(sentent);
+
+        function concat(accumstr,item){
+            return accumstr + item;
+        }
+        var words = ["the" , "quick" , "brown" , "fox"];
+        var sentent = words.reduceRight(concat);
+        console.log(sentent);
+
+        //生成新数组的迭代器方法 map()
+        function curve(grade){
+            return grade += 5;
+        }
+        var grades = [77,65,81,92,83];
+        var newgrade = grades.map(curve);
+        console.log(newgrade);
+
+        function first(word){
+            return word[0];
+        }
+        var words = ["for", "your","information "];
+        var acronym = words.map(first);
+        console.log(acronym.join(""));  //fyi
+
+        //filter()
+        function isevent(num){
+            return num % 2 == 0;
+        }
+        function isOld(num){
+            return num % 2 !=0;
+        }
+        var nums = [];
+        for (var i = 0; i < 20; ++i) {
+            nums[i] = i+1;
+        }
+        var evens = nums.filter(isevent);
+        console.log("event number is :");
+        console.log(evens);//[2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+        var odds = nums.filter(isOld);
+        console.log("old number is :");
+        console.log(odds);//[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]     
+
+    </script>
+</body>
+</html>

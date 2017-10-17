@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		
+		function passing(num) {
+			return num >= 60;
+		}
+		var grades = [];
+		for(var i = 0; i<20; ++i){
+			grades[i] = Math.floor(Math.random() * 101);
+		}
+		var passGrades = grades.filter(passing);
+		console.log("All grades :");
+		console.log(grades);  // [32, 7, 30, 37, 30, 97, 43, 62, 52, 32, 77, 49, 78, 66, 1, 4, 40, 12, 62, 9]
+
+		console.log("All passGrades :");
+		console.log(passGrades); //[97, 62, 77, 78, 66, 62]
+
+		function after(str){
+			if(str.indexOf('cie') > -1){
+				return true;
+			}
+			return false;
+		}
+		var words = ["recieve","deceive","percieve","deceit","concieve"];
+		var misspelled = words.filter(after);
+		console.log(misspelled);  //["recieve", "percieve", "concieve"]
+
+		//二维数组 和 多维数组
+		var twod = [];
+		var rows = 5;
+		for (var i = 0; i < rows; ++i) {
+			twod[i] = [];
+		}
+		console.log(twod); //Array(0) , ...
+
+		//设定数组的行数 列数
+		Array.matrix = function(numrows,numcols,initial){
+			var arr = [];
+			for(var i = 0; i<numrows;++i){
+				var columns = [];
+				for(var j = 0; j<numcols; ++j){
+					columns[j] = initial;
+				}
+				arr[i] = columns;
+			}
+			return arr;
+		}
+
+		//测试
+		var nums = Array.matrix(5,5,0);
+		console.log(nums[1][1]);  //0
+
+		var names = Array.matrix(3,3,0);
+		names[1][2] = "joe";
+		console.log(names[1][2]);
+
+		var grade =[
+			[89,77,78],
+			//0  1  2
+			[76,82,81],
+			[91,94,89]
+		];
+		console.log(grade[2][2]);   //89
+		console.log(grade[1][2]);	//81
+
+		//两层for循环 外层循环对应行 内层循环对应列
+		//每一行对应学生的成绩记录 将该学生的所有成绩相加 然后除以科目数得到该学生的平均成绩
+		var gradeStr = [[89,77,78],[76,82,81],[91,94,89]];
+		var total = 0;
+		var average = 0.0;
+		for(var row = 0; row < gradeStr.length; row++){
+			for (var col = 0; col < gradeStr[row].length; col++) {
+				total += gradeStr[row][col];
+			}
+			average = total / gradeStr[row].length;
+			console.log("Student" + parseInt(row+1) + "average :" + average.toFixed(2) );  
+			//Student1average :81.33  Student2average :79.67  Student3average :91.33
+			var total = 0;
+			var average = 0.0;
+		}
+
+		//外层循环对应列 内层循环对应行 计算学生各科的平均成绩
+		var gradeStr = [[89,77,78],[76,82,81],[91,94,89]];
+		var total = 0;
+		var average = 0.0;
+		for(var col = 0; col < gradeStr.length; ++col){
+			for (var row = 0; row < gradeStr[col].length; ++row) {
+				total += gradeStr[row][col];
+			}
+			average = total / gradeStr[col].length;
+			console.log("Student" + parseInt(col+1) + "average :" + average.toFixed(2) );  
+			//Student1average :81.33  Student2average :79.67  Student3average :91.33
+			 total = 0;
+			  average = 0.0;
+		}
+
+		//参差不齐的数组也能计算出平均分
+		var gradeStr = [[89,77],[76,82,81],[91,94,89,99]];
+		var total = 0;
+		var average = 0.0;
+		for(var row = 0; row<gradeStr.length;++row){
+			for(var col = 0; col<gradeStr[row].length; ++col){
+				total += gradeStr[row][col];
+			}
+			average = total / gradeStr[row].length;
+			console.log(  "Student"+ parseInt(row+1) +"average :" + average.toFixed(2) );
+			total= 0;
+			average = 0;
+		}
+
+		//数组的方法和属性对对象依然适用
+		function Point(x,y){
+			this.x = x;
+			this.y = y;
+		}
+
+		function displayPts(arr){
+			for(var i = 0 ; i<arr.length ; ++i){
+				console.log( arr[i].x +"," + arr[i].y );
+			}
+		}
+
+		var p1 = new Point(1,2);
+		var p2 = new Point(3,5);
+		var p3 = new Point(2,8);
+		var p4 = new Point(4,4);
+		var points = [p1,p2,p3,p4];
+		for(var i = 0; i<points.length ; i++){
+			console.log(  "Point" +  parseInt(i + 1) + ":" + points[i].x + "," + points[i].y );
+		}
+		var p5 = new Point(12,-3);
+		points.push(p5);
+		console.log(" After push : ");
+		console.log(points);
+		//shift() 删除数组第一个元素
+		points.shift();
+		console.log("After shift :");
+		displayPts(points);
+	</script>
+	
+	<script>
+		
+	//对象中的数组 
+	//计算存储在对象中的平均气温
+	//一个方法用来增加一个新的气温纪录
+	//另一个方法用来计算存储在对象中的平均气温
+	function weekTemps() {
+		this.dataStore = [];
+		this.add = add;
+		this.average = average;
+	}
+
+	function add(temp){
+		this.dataStore.push(temp);
+	}
+
+	function average(){
+		var total = 0; 
+		for(var i = 0; i<this.dataStore.length ; i++){
+			total += this.dataStore[i];
+		}
+		return total / this.dataStore.length;
+	}
+	var thisweek = new weekTemps();
+	thisweek.add(52);
+	thisweek.add(55);
+	thisweek.add(61);
+	thisweek.add(65);
+	thisweek.add(50);
+	thisweek.add(52);
+	thisweek.add(49);
+	thisweek.add(55);
+	console.log(thisweek.average());  //54.875
+
+	//实现列表
+	//定义构造函数
+	function List(){
+
+		this.listSize = 0;
+		this.pos = 0;
+		this.dataStore = [];
+		this.clear = clear;
+		this.find = find;
+		this.toString = toString;
+		this.insert = insert;
+		this.append = append;
+		this.remove = remove;
+		this.front = front;
+		this.end = end;
+		this.prev = prev;
+		this.next = next;
+		this.length = length;
+		this.currPos = currPos;
+		this.moveTo = moveTo;
+		this.getElement = getElement;
+		this.length = length;
+		this.contains = contains;
+
+	}
+
+	//append()添加元素
+	function append(ele){
+		this.dataStore[this.listSize++] = ele;
+	}
+
+	//remove()  find() 查找 进行截取 数组改变后 将listSize-1 如果数组删除成功 返回true 否则返回false
+	function find(ele){
+		for(var i = 0; i<this.dataStore.length; i++){
+			if (this.dataStore[i] == ele) {
+				return i;
+			}
+		}
+		return -i;
+	}
+
+	function remove(ele) {
+		var foundAt = this.find(ele);
+		if (foundAt > -1) {
+			this.dataStore.splice(foundAt,1);
+			--this.listSize;
+			return true;
+		}
+		return false;
+	}
+
+	//length()返回列表中元素的个数
+	function length(){
+		return this.listSize;
+	}
+
+	//显示列表中的元素 toString()
+	function toString(){
+		return this.dataStore;
+	}
+
+	//测试代码
+	var names = new List();
+	names.append("Apple");
+	names.append("bglo");
+	names.append("Ogin");
+	console.log(names.toString());  // ["Apple", "bglo", "Ogin"]
+	names.remove("bglo");
+	console.log(names.toString());	//["Apple", "Ogin"]
+
+	//插入列表中的某个元素
+	function insert(ele,after){
+
+		var insertPos = this.find(after);
+		if(insertPos > 1){
+			this.dataStore.splice( insertPos+1 , 0, ele );
+			++this.listSize;
+			return true;	
+		}
+		return false;
+	}
+
+	//delete操作字符删除datastore 接着在下一行创建一个新数组
+	//最后一行将listSize + 1  并返回true 表示插入成功
+	function clear(){
+		delete this.dataStore;
+		this.dataStore = [];
+		this.listSize = this.pos = 0;
+	}
+
+	//判定给定值是否在列表中
+	function contains(ele){
+		for(var i = 0; i<this.dataStore.length; i++){
+			if (this.dataStore[i] == ele) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	//遍历列表
+	function front() {
+		this.pos = 0;
+	}
+
+	function end(){
+		this.pos = this.listSize-1;
+	}
+
+	function prev(){
+		if (this.pos > 0) {
+			--this.pos;
+		}
+	}
+
+	function next(){
+		if (this.pos < this.listSize-1) {
+			this.pos++;
+		}
+	}
+
+	function currPos() {
+		return this.pos;
+	}
+
+	function moveTo(position) {
+		this.pos = position;
+	}
+
+	function getElement() {
+		return this.dataStore[this.pos];
+	}
+
+	var names = new List();
+	names.append("Clyton");
+	names.append("Raymound");
+	names.append("Cynthia");
+	names.append("Jennifer");
+	names.append("Bryan");
+	names.append("Danny");
+	names.front();
+	console.log(names.getElement());  //Clyton
+	names.next();
+	console.log(names.getElement());  //Raymound
+	names.next();
+	names.next();
+	names.prev();
+	console.log(names.getElement());  //Cynthia
+
+	//读取文件内容
+		var movies = read(films.txt).split("\n");
+
+		//删除数组末尾的空格
+		function createArr(file) {
+			var arr = read(file).split('\n');
+			for(var i = 0; i<arr.length; i++){
+				arr[i] = arr[i].trim();
+			}
+			return arr;
+		}
+
+		//将数组movies保存到一个列表中
+		var movieList = new List();
+		for(var i = 0; i<movies.length; i++){
+			movieList.append(movies[i]);
+		}
+
+
+		//定义Customer对象 
+		//对列表中的每一个元素 都使用instranceof 判断是否是Customer对象
+		//如果是 就使用name和movies做索引 如果不是 就返回该元素
+		function displayList(list) {
+			for(list.front();list.currPos<list.length();list.next()){
+				
+				if (list.getElement() instanceof Customer) {
+					console.log(getElement()["name"] +  "," + list.getElement()["movies"] );
+				}else{
+					console.log(list.getElement());
+				}
+			}
+		}
+
+		//创建一个新列表
+		var customer = new List();
+		//构造函数
+		function Customer(name,movie) {
+			this.name = name;
+			this.movie = movie;
+		}
+
+		function checkOut(name,movie,filmList,customerList){
+			if(movieList.contains(movie)){
+				var c = new Customer(name,movie);
+				customerList.append(c);
+				filmList.remove(movie);
+			}else{
+				console.log(movie + " is not availble . ");
+			}
+		}
+
+		//测试
+		var movies = createArr("films.txt");
+		var movieList = new List();
+		var customers = new List();
+		for(var i = 0; i<movies.length; i++){
+			movieList.append(movies[i]);
+		}
+		console.log( "Available movies : \n" );
+		displayList(movies());
+		checkOut(" Jane Done","The Godfater",movieList,customers);
+		console.log("\nCustomer Rentals : \n");
+		displayList(customers);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+
+</body>
+</html>

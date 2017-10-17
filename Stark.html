@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+
+		//对栈的操作
+		//push() 压入栈
+		//pop() 访问栈顶元素 但对其永久性删除
+		//peek() 访问栈元素而不删除
+		function Stack(){
+			this.dataStore = [];  //[1,2,3,4]
+			this.top = 0; //初始化
+			this.push = push;
+			this.pop = pop;
+			this.peek = peek;
+			this.clear = clear;
+			this.length = length;
+		}
+
+		//对栈压入一个新元素保存在datastore里 top+1
+		function push(ele){
+			this.dataStore[this.top++] = ele;
+		}
+
+		//删除则是 top--操作
+		function pop() {
+		 	return this.dataStore[--this.top];
+		}
+
+		function peek(){
+			return this.dataStore[this.top-1];
+		}
+		//如果对空栈调用peek方法 方法返回undefined
+
+		function length(){
+			return this.top;
+		}
+		//清空栈
+		function clear(){
+			this.top = 0;
+		}
+
+		//测试
+		var s = new Stack();
+		//压入三个
+		s.push("David");
+		s.push("Ranymound");
+		s.push("Bryan");   //["David","Ranymound"]
+		//打印长度
+		console.log("length :" + s.length()); 
+		//出栈 Bryan
+		console.log(s.peek());
+		//删掉一个
+		var popped = s.pop();
+		console.log("popped is element :" + popped);
+		//出栈Ranymound
+		console.log(s.peek());
+		s.push("Cythia");
+		//出栈Cythia
+		console.log(s.peek());
+		s.clear();  //清空
+		//length 0
+		console.log("length :" + s.length());
+		console.log(s.peek());  //出栈undefined
+		s.push("Clyton");
+		console.log(s.peek());//Clyton
+
+		//数制间的相互转换
+		//将数字转化为二至九进制的数字
+		function mulBase(num,base){
+			var s = new Stack();
+			do{
+				s.push( num % base );
+				num = Math.floor(num /= base);
+			}while(num > 0);
+			var converted = "";
+			while(s.length() > 0){
+				converted += s.pop();
+			}
+			return converted;
+		}
+
+		var num = 32 ;
+		var base = 2 ;
+		var newNum = mulBase(num , base);
+		console.log( num + "converted to base :" +  base + "is " +newNum );
+		num = 125;
+		base = 8;
+		var newNum = mulBase(num , base);
+		console.log( num + " converted to base : " + base + "is " + newNum  );	
+
+
+		//判断给定字符串是否是回文
+		function isPalindrome(word) {
+			var s = new Stack();
+			for (var i = 0; i < word.length; i++) {
+				s.push( word[i] );
+			}
+			var rword = "" ;
+			while( s.length() > 0 ){
+				rword += s.pop();
+			}
+			if(word === rword){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		var word = "hello";
+		if(isPalindrome(word)){
+			console.log( word+"is a palindrome .");
+		}else{
+			console.log(word + "is not a palindrome .");
+		}
+
+		var word = "racecar";
+		if(isPalindrome(word)){
+			console.log( word + "is a palindrome .");
+		}else{
+			console.log(word + "is not a palindrome .");
+		}
+
+		//栈实现递归
+		//5!=5x4x3x2x1=120
+		function factorial(n) {
+			if (n===0) {
+				return 1;
+			}else{
+				return n * factorial(n-1);
+			}
+		}
+		console.log(factorial(6)); //720
+
+
+		//使用栈模拟递归实现
+		function fact(n){
+			var s = new Stack(); 
+			while( n> 1){
+				s.push(n--);
+			}
+			var product = 1;
+			while(s.length()>0){
+				product *= s.pop();
+			}
+			return product;
+		}
+		console.log(factorial(7));
+		console.log(fact(7));
+
+		var names = [];
+		names.push("Cythia");
+		names.push("Jennifer");
+		console.log(names);
+
+		names.shift();
+		console.log(names);
+
+		function Queue(){
+			this.dataStore = [];
+			this.enqueue = enqueue;
+			this.dequeue = dequeue;
+			this.front = front;
+			this.back = back;
+			this.toString  =toString;
+			this.empty = empty;
+		}
+		
+		//添加元素 enqueue()
+		function enqueue(element){
+			this.dataStore.push(element);
+		}
+
+		//删除
+		function dequeue(){
+			return this.dataStore.shift();
+		}
+
+		//读取
+		function front(){
+			return this.dataStore[0];
+		}
+		function back(){
+			return this.dataStore[this.dataStore.length-1];
+		}
+		function toString(){
+			var retStr  = "";
+			for(var i = 0; i<this.dataStore.length; i++){
+				retStr += this.dataStore[i] + "\n";
+			}
+			return retStr;
+		}
+
+		function empty(){
+			if (this.dataStore.length == 0) {
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		//测试
+		var q = new Queue();
+		q.enqueue("Meredith");
+		q.enqueue("Cythia");
+		q.enqueue("Jennifer");
+		console.log(q.toString());
+
+		//删除
+		q.dequeue();
+		console.log(q.toString());
+		console.log( "Front of queue :" + q.front() );
+		console.log( "Back of queue :" + q.back() );
+		
+		//使用对列 方块舞的舞伴的分配问题
+
+		// function Dancer(name,sex){
+		// 	this.name = name;
+		// 	this.sex = sex;
+		// }
+
+		// function getDancers(males,females){
+		// 	var names = read("dancers.txt").split("\n");
+		// 	for(var i = 0; i<names.length ; i++){
+		// 		names[i] = names[i].trim();
+		// 	}
+
+		// 	for(var i = 0; i< names.length ; i++){
+		// 		var dancer = names[i].split(" ");
+		// 		var sex = dancer[0];
+		// 		var name = dancer[1];
+		// 		if(sex == "F"){
+		// 			femaleDaners.enqueue( new Dancer(name,sex) );
+		// 		}else{
+		// 			maleDaners.enqueue( new Dancer(name,sex) );
+		// 		}
+		// 	}
+		// }
+
+		// function dance(males,females){
+		// 	console.log( " The dance partners are : \n " );
+
+		// 	while(!females.empty() & !males.empty() ){
+		// 		person = females.dequeue();
+		// 		person = males.dequeue();
+		// 		console.log( "and the male dance is :" + person.name );
+		// 	}
+		// 	console.log();
+		// }
+		
+		// var maleDaners = new Queue();
+		// var femaleDaners = new Queue();
+		// getDancers(maleDaners,femaleDaners);
+		// dance(maleDaners,femaleDaners);
+		// if(!femaleDaners.empty()){
+		// 	console.log( femaleDaners.front().name + "is waiting to dance" );
+		// }
+		// if(!maleDaners.empty()){
+		// 	console.log( maleDaners.front().name + "is waiting to dance" );
+		// }
+
+		//优先队列
+		function Patient(name,code) {
+			this.name = name;
+			this.code = code;  //一个整数
+		}
+
+		function  dequeue() {
+			var priorty = this.dataStore[0].code;
+			for(var i = 1 ; i < dataStore.length ; i++){
+				if(this.dataStore[i].code < priorty){
+					priorty = i;
+				}
+			}
+			return this.dataStore.splice(priorty,1);
+		}
+
+		
+
+
+
+
+
+
+
+
+		//基数排序
+		function distribute(nums,queues,n,digit){
+			for(var i = 0; i<n; i++){
+				if(digit == 1){
+					queues[nums[i]%10].enqueue(nums[i]);
+				}
+			}
+		}
+
+		function collect(queues,nums){
+			for(var i,digit = 0; digit<10; i++){
+				while(!queues[digit].empty()){
+					nums[i++] = queues[digit].dequeue();
+				}
+			}
+		}
+
+		function disArray(arr){
+			for(var i = 0 ; i< arr.length ; i++){
+				putstr(arr[i] + " ");
+			}
+		}
+
+		//主程序
+		var queues = [];
+		for(var i = 0; i< 10;i++){
+			queues[i] = new Queue();
+		}
+
+		var nums = [];
+		for(var i = 0; i<10; i++){
+			nums[i] = Math.floor(Math.floor(Math.random()* 101));
+		}
+
+		console.log( "Before radix sort :" );
+		console.log(disArray(nums));
+		distribute(nums,queues,10,1);
+		collect(queues,nums);
+		distribute(nums,queues,10,10);
+		collect(queues,nums);
+		console.log("\n After radix sort :")
+		console.log(disArray(nums));
+
+	</script>
+</body>
+</html>

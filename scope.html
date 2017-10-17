@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+
+        <script>
+            
+            //全局
+            function Showscope(){
+                return scope;
+            }
+            var scope = "global";
+            console.log(scope);
+            console.log(Showscope());
+
+            //局部
+            function Showscope(){
+                var scope = "loca";
+                return scope;            
+            }
+            var scope = "global";
+            console.log(scope); //global
+            console.log(Showscope());//loca
+
+            //递归
+            function factorcal(number){
+                if(number == 1){
+                    return number;
+                }else{
+                    return number * factorcal(number - 1);
+                }
+            }
+            console.log(factorcal(5));   //120 => 5*4*3*2*1
+
+            //面向对象
+            function Checking(amount){
+                this.balance = amount; //属性
+                this.deposit = deposit;  //方法
+                this.widthdraw = widthdraw;  //方法
+                this.toString = toString; //方法
+            }
+
+            function deposit(amount){
+                this.balance += amount;
+            }
+
+            function widthdraw(amount){
+                if(amount<= this.balance){
+                    this.balance -= amount;
+                }
+                if(amount>this.balance){
+                    console.log("insufficient funds");
+                }
+            }
+
+            function toString(){
+                return "balance :" + this.balance;
+            }
+
+            var account = new Checking(500);
+            account.deposit(1000);
+            console.log(account.toString()); //balance
+            account.widthdraw(750);
+            console.log(account.toString());
+            account.widthdraw(800);
+            console.log(account.toString());
+
+        </script>
+
+
+
+    
+    </body>
+</html>

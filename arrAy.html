@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        
+        <script>
+            
+            var numbers = [];
+            console.log(numbers.length);
+
+            var num = [1,2,3,4,5];
+            console.log(num.length);
+
+            var arr= new Array(1,2,3,6,7,8);
+            console.log(arr.length);
+
+            var number = new Array();
+            console.log(number.length);
+
+            var nu = new Array(10);
+            console.log(nu.length);
+
+            var nums = [];
+            for(var i = 0; i<100; ++i){
+                nums[i] = i+1;
+            }
+            console.log(nums);
+            
+            var number1 = [1,2,3,4,5];
+            var number2 = number1[0]+number1[1]+number1[2]+number1[3]+number1[4];
+            console.log(number2);
+
+            var data = [1,2,3,5,8,13,21];
+            var sum2 = 0;
+            for(var i = 0; i<data.length;++i){
+                sum2 += data[i];
+            }
+            console.log(sum2);
+
+            var sentence = "the quick brown fox jumed over the lazy dog";
+            var words = sentence.split(" ");
+            for(var i = 0; i<words.length; ++i){
+                console.log("word" + i + ":" + words[i]);
+            }
+
+            //浅复制
+            var sums = [];
+            for(var i = 0; i<100;++i){
+                sums[i] = i+1;
+            }
+
+            var samenums = sums;
+            sums[0] =400;
+            console.log(samenums[0]);   //400
+
+            //深复制
+            //传入两个形参 遍历arr1 内所有参数赋值给 arr2
+            function copy(arr1,arr2){
+                for(var i = 0; i<arr1.length; ++i){
+                    arr2[i] = arr1[i];
+                }
+            }
+            
+            var nums1 = [];
+            for(var i = 0; i<100;++i){
+                nums1[i] = i+1;
+            }
+            var samenums1 = [];
+            copy(nums1,samenums1);
+            nums1[i] = 300;
+            console.log(samenums1[0]);
+            var nums1 = [1,2,3,4,5];
+            console.log(nums1);
+        </script>
+
+
+
+
+    </body>
+</html>
